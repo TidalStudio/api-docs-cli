@@ -1,7 +1,6 @@
 <p align="center">
   <img src="api-docs-cli.png" alt="api-docs-cli logo" width="300">
 </p>
-
 <h1 align="center">api-docs-cli</h1>
 
 <p align="center">
