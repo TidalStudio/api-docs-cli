@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/@tidalstudios/api-docs-cli"><img src="https://img.shields.io/npm/v/@tidalstudios/api-docs-cli.svg" alt="npm version"></a>
-  <img src="https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen" alt="Node.js version">
+  <img src="https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen" alt="Node.js version">
   <a href="https://github.com/TidalStudio/api-docs-cli/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Elastic--2.0-blue" alt="License"></a>
   <a href="https://github.com/TidalStudio/api-docs-cli/actions"><img src="https://github.com/TidalStudio/api-docs-cli/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="https://prettier.io/"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" alt="Code style: prettier"></a>
