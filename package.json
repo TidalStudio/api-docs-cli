@@ -1,6 +1,6 @@
 {
   "name": "@tidalstudios/api-docs-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CLI tool for extracting API documentation",
   "type": "module",
   "bin": {
