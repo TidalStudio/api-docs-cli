@@ -7,9 +7,9 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/api-docs-cli"><img src="https://img.shields.io/npm/v/api-docs-cli.svg" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/@tidalstudios/api-docs-cli"><img src="https://img.shields.io/npm/v/@tidalstudios/api-docs-cli.svg" alt="npm version"></a>
   <img src="https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen" alt="Node.js version">
-  <a href="https://github.com/TidalStudio/api-docs-cli/blob/main/LICENSE"><img src="https://img.shields.io/github/license/TidalStudio/api-docs-cli" alt="License"></a>
+  <a href="https://github.com/TidalStudio/api-docs-cli/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Elastic--2.0-blue" alt="License"></a>
 </p>
 
 > **Why this tool?** API documentation is scattered across different formats and frameworks. This CLI gives you instant access to any API's endpoints—just provide a name or URL.
@@ -17,13 +17,13 @@
 ## Installation
 
 ```bash
-npm install -g api-docs-cli
+npm install -g @tidalstudios/api-docs-cli
 ```
 
 Or run directly with npx:
 
 ```bash
-npx api-docs-cli endpoints stripe
+npx @tidalstudios/api-docs-cli endpoints stripe
 ```
 
 ## Quick Start

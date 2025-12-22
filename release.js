@@ -118,9 +118,9 @@ async function main() {
   writePackageJson(pkg);
   console.log(`\n✓ Updated package.json to ${newVersion}`);
 
-  // Publish to npm
+  // Publish to npm (--access=public required for scoped packages)
   console.log('\nPublishing to npm...');
-  exec('npm publish');
+  exec('npm publish --access=public');
   console.log('✓ Published to npm');
 
   // Git operations
