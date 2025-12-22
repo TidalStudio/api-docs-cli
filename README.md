@@ -1,6 +1,8 @@
 <p align="center">
-  <h1 align="center">api-docs-cli</h1>
+  <img src="api-docs-cli.png" alt="api-docs-cli logo" width="200">
 </p>
+
+<h1 align="center">api-docs-cli</h1>
 
 <p align="center">
   A CLI for discovering and extracting API documentation from any source.
