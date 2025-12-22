@@ -1,8 +1,7 @@
 <p align="center">
   <img src="api-docs-cli.png" alt="api-docs-cli logo" width="300">
-  <br>
-  <strong style="font-size: 2em;">api-docs-cli</strong>
 </p>
+<h1 align="center">API Docs CLI</h1>
 
 <p align="center">
   A CLI for discovering and extracting API documentation from any source.
@@ -12,6 +11,8 @@
   <a href="https://www.npmjs.com/package/@tidalstudios/api-docs-cli"><img src="https://img.shields.io/npm/v/@tidalstudios/api-docs-cli.svg" alt="npm version"></a>
   <img src="https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen" alt="Node.js version">
   <a href="https://github.com/TidalStudio/api-docs-cli/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Elastic--2.0-blue" alt="License"></a>
+  <a href="https://github.com/TidalStudio/api-docs-cli/actions"><img src="https://github.com/TidalStudio/api-docs-cli/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://prettier.io/"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" alt="Code style: prettier"></a>
 </p>
 
 > **Why this tool?** API documentation is scattered across different formats and frameworks. This CLI gives you instant access to any API's endpoints—just provide a name or URL.
@@ -54,13 +55,13 @@ api-docs list
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `endpoints` | List all endpoints from an API |
-| `endpoint` | Get details for a specific endpoint |
-| `fetch` | Fetch and cache an API spec |
-| `list` | List cached API specs |
-| `clear` | Clear cached specs |
+| Command     | Description                         |
+| ----------- | ----------------------------------- |
+| `endpoints` | List all endpoints from an API      |
+| `endpoint`  | Get details for a specific endpoint |
+| `fetch`     | Fetch and cache an API spec         |
+| `list`      | List cached API specs               |
+| `clear`     | Clear cached specs                  |
 
 ## AI Agent Integration
 

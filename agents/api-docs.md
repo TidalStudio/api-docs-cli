@@ -20,6 +20,7 @@ You are an API documentation specialist that uses the api-docs CLI to fetch, cac
 ## Command Reference
 
 ### List Endpoints
+
 ```bash
 api-docs endpoints <query>           # Provider name or URL
 api-docs endpoints stripe            # APIs.guru lookup
@@ -30,6 +31,7 @@ api-docs endpoints stripe -V 2.0     # Specific API version
 ```
 
 ### Fetch & Cache Spec
+
 ```bash
 api-docs fetch <query>               # Fetch and cache spec metadata
 api-docs fetch github
@@ -38,17 +40,20 @@ api-docs fetch stripe --no-cache     # Bypass cache
 ```
 
 ### List Cached Specs
+
 ```bash
 api-docs list                        # Show all cached specs
 ```
 
 ### Clear Cache
+
 ```bash
 api-docs clear                       # Clear all cached specs
 api-docs clear <url>                 # Clear specific spec
 ```
 
 ### Get Endpoint Details
+
 ```bash
 api-docs endpoint <cached-url> <path>           # Details for specific endpoint
 api-docs endpoint <cached-url> /users/{id}      # Path with parameters
@@ -60,28 +65,37 @@ api-docs endpoint <cached-url> /users -m POST   # Specific HTTP method
 ## Common Workflows
 
 ### Look up an API by name
+
 ```bash
 api-docs endpoints stripe
 ```
+
 Returns a scannable list of all endpoints with HTTP methods and descriptions.
 
 ### Explore a custom API spec
+
 ```bash
 api-docs endpoints https://api.example.com/docs/openapi.json
 ```
+
 Fetches the spec, caches it, and displays endpoints.
 
 ### Get details for a specific endpoint
+
 First, list endpoints to find the cached URL:
+
 ```bash
 api-docs list
 ```
+
 Then get details:
+
 ```bash
 api-docs endpoint https://api.stripe.com/openapi.json /v1/customers -m POST
 ```
 
 ### Refresh stale documentation
+
 ```bash
 api-docs endpoints stripe -f
 ```

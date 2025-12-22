@@ -87,10 +87,7 @@ const EMPTY_MANIFEST = {
  * @returns {string} 16-character hex hash
  */
 export function generateCacheKey(url) {
-  return createHash('sha256')
-    .update(url.trim().toLowerCase())
-    .digest('hex')
-    .slice(0, 16);
+  return createHash('sha256').update(url.trim().toLowerCase()).digest('hex').slice(0, 16);
 }
 
 /**

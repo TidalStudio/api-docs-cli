@@ -14,11 +14,11 @@ import chalk from 'chalk';
  * Colors extracted from n8n Scalar docs (display-p3 converted to sRGB)
  */
 const HTTP_METHOD_COLORS = {
-  GET: 'rgb(0,160,255)',      // neon blue
-  POST: 'rgb(0,200,80)',      // neon green
-  DELETE: 'rgb(255,50,50)',   // neon red
-  PUT: 'rgb(255,120,30)',     // neon orange
-  PATCH: 'rgb(255,220,50)',   // neon yellow
+  GET: 'rgb(0,160,255)', // neon blue
+  POST: 'rgb(0,200,80)', // neon green
+  DELETE: 'rgb(255,50,50)', // neon red
+  PUT: 'rgb(255,120,30)', // neon orange
+  PATCH: 'rgb(255,220,50)', // neon yellow
   HEAD: 'dim',
   OPTIONS: 'dim',
 };
@@ -28,7 +28,14 @@ const HTTP_METHOD_COLORS = {
  * Used to filter out non-operation properties like $ref, parameters, etc.
  */
 const VALID_METHODS = new Set([
-  'get', 'post', 'put', 'patch', 'delete', 'head', 'options', 'trace',
+  'get',
+  'post',
+  'put',
+  'patch',
+  'delete',
+  'head',
+  'options',
+  'trace',
 ]);
 
 /**
@@ -292,7 +299,7 @@ export function formatEndpointList(spec, options = {}) {
  * console.log(output);
  */
 export function formatScrapedEndpoints(scrapedResult, options = {}) {
-  const { verbose = false, grouped = true, sourceUrl } = options;
+  const { verbose = false, grouped = true } = options;
   const useColor = options.color ?? process.stdout.isTTY ?? false;
 
   const lines = [];
@@ -316,7 +323,9 @@ export function formatScrapedEndpoints(scrapedResult, options = {}) {
   }
 
   // Check if any endpoints have descriptions
-  const hasDescriptions = scrapedResult.endpoints.some(e => e.description && e.description.trim());
+  const hasDescriptions = scrapedResult.endpoints.some(
+    (e) => e.description && e.description.trim()
+  );
 
   // Format endpoints (grouped or flat)
   if (grouped && scrapedResult.endpoints.length > 0) {

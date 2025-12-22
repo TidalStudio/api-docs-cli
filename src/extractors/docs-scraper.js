@@ -59,9 +59,7 @@ export class PageLoadError extends DocsScraperError {
 // Configuration
 // ============================================================================
 
-const SUPPORTED_FRAMEWORKS = ['swagger-ui', 'redoc', 'scalar', 'generic'];
 const PAGE_LOAD_TIMEOUT = 30000;
-const EXTRACTION_TIMEOUT = 30000;
 
 // ============================================================================
 // Public API
@@ -101,7 +99,7 @@ export async function scrapeEndpoints(url, options = {}) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // Detect framework
-    const framework = forcedFramework || await detectFramework(page);
+    const framework = forcedFramework || (await detectFramework(page));
 
     if (!framework) {
       throw new FrameworkNotDetectedError(url);
@@ -121,10 +119,7 @@ export async function scrapeEndpoints(url, options = {}) {
       extractedAt: new Date().toISOString(),
     };
   } catch (error) {
-    if (
-      error instanceof FrameworkNotDetectedError ||
-      error instanceof ExtractionError
-    ) {
+    if (error instanceof FrameworkNotDetectedError || error instanceof ExtractionError) {
       throw error;
     }
     if (error.name === 'TimeoutError') {
@@ -205,8 +200,9 @@ async function detectFramework(page) {
 
     // Check for common API doc patterns (generic)
     const hasHttpMethods = document.body.innerHTML.match(/\b(GET|POST|PUT|DELETE|PATCH)\b/gi);
-    const hasApiPaths = document.body.innerHTML.match(/\/[a-z]+\/\{[^}]+\}/gi) ||
-                        document.body.innerHTML.match(/\/api\/[a-z]+/gi);
+    const hasApiPaths =
+      document.body.innerHTML.match(/\/[a-z]+\/\{[^}]+\}/gi) ||
+      document.body.innerHTML.match(/\/api\/[a-z]+/gi);
 
     if (hasHttpMethods && hasApiPaths) {
       return 'generic';
@@ -260,7 +256,11 @@ async function extractSwaggerUiEndpoints(page) {
           const endpoints = [];
           for (const [path, methods] of Object.entries(spec.paths)) {
             for (const [method, details] of Object.entries(methods)) {
-              if (['get', 'post', 'put', 'delete', 'patch', 'options', 'head'].includes(method.toLowerCase())) {
+              if (
+                ['get', 'post', 'put', 'delete', 'patch', 'options', 'head'].includes(
+                  method.toLowerCase()
+                )
+              ) {
                 endpoints.push({
                   method: method.toUpperCase(),
                   path,
@@ -273,7 +273,7 @@ async function extractSwaggerUiEndpoints(page) {
           }
           return endpoints;
         }
-      } catch (e) {
+      } catch (_e) {
         // Fall through to DOM extraction
       }
     }
@@ -320,7 +320,11 @@ async function extractRedocEndpoints(page) {
       const endpoints = [];
       for (const [path, methods] of Object.entries(state.spec.data.paths)) {
         for (const [method, details] of Object.entries(methods)) {
-          if (['get', 'post', 'put', 'delete', 'patch', 'options', 'head'].includes(method.toLowerCase())) {
+          if (
+            ['get', 'post', 'put', 'delete', 'patch', 'options', 'head'].includes(
+              method.toLowerCase()
+            )
+          ) {
             endpoints.push({
               method: method.toUpperCase(),
               path,
@@ -401,12 +405,15 @@ async function extractScalarEndpoints(page) {
   // Check for spec in various Scalar storage locations
   const specEndpoints = await page.evaluate(() => {
     // Try to find spec in Scalar's configuration or state
-    const scalarEl = document.querySelector('[data-spec-url], [data-configuration], .scalar-api-reference');
+    const scalarEl = document.querySelector(
+      '[data-spec-url], [data-configuration], .scalar-api-reference'
+    );
 
     // Check for spec URL in data attribute
-    const specUrl = scalarEl?.getAttribute('data-spec-url') ||
-                    scalarEl?.getAttribute('data-url') ||
-                    document.querySelector('script[data-spec]')?.getAttribute('data-spec');
+    const specUrl =
+      scalarEl?.getAttribute('data-spec-url') ||
+      scalarEl?.getAttribute('data-url') ||
+      document.querySelector('script[data-spec]')?.getAttribute('data-spec');
 
     // Look for inline spec in script tags
     const scripts = document.querySelectorAll('script');
@@ -423,7 +430,11 @@ async function extractScalarEndpoints(page) {
               const endpoints = [];
               for (const [path, methods] of Object.entries(spec.paths)) {
                 for (const [method, details] of Object.entries(methods)) {
-                  if (['get', 'post', 'put', 'delete', 'patch', 'options', 'head'].includes(method.toLowerCase())) {
+                  if (
+                    ['get', 'post', 'put', 'delete', 'patch', 'options', 'head'].includes(
+                      method.toLowerCase()
+                    )
+                  ) {
                     endpoints.push({
                       method: method.toUpperCase(),
                       path,
@@ -437,7 +448,7 @@ async function extractScalarEndpoints(page) {
               return { endpoints, specUrl: null };
             }
           }
-        } catch (e) {
+        } catch (_e) {
           // Continue searching
         }
       }
@@ -462,7 +473,11 @@ async function extractScalarEndpoints(page) {
         const endpoints = [];
         for (const [path, methods] of Object.entries(specResponse.paths)) {
           for (const [method, details] of Object.entries(methods)) {
-            if (['get', 'post', 'put', 'delete', 'patch', 'options', 'head'].includes(method.toLowerCase())) {
+            if (
+              ['get', 'post', 'put', 'delete', 'patch', 'options', 'head'].includes(
+                method.toLowerCase()
+              )
+            ) {
               endpoints.push({
                 method: method.toUpperCase(),
                 path,
@@ -477,7 +492,7 @@ async function extractScalarEndpoints(page) {
           return endpoints;
         }
       }
-    } catch (e) {
+    } catch (_e) {
       // Fall through to DOM extraction
     }
   }
@@ -509,7 +524,11 @@ async function extractScalarEndpoints(page) {
       const method = methodEl?.textContent?.trim().toUpperCase();
       const path = pathEl?.textContent?.trim();
 
-      if (method && path && ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD'].includes(method)) {
+      if (
+        method &&
+        path &&
+        ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD'].includes(method)
+      ) {
         const key = `${method}:${path}`;
         if (!seen.has(key)) {
           seen.add(key);
@@ -608,7 +627,7 @@ async function extractGenericEndpoints(page) {
       const rows = table.querySelectorAll('tr');
       for (const row of rows) {
         const cells = row.querySelectorAll('td, th');
-        const cellTexts = Array.from(cells).map(c => c.textContent?.trim() || '');
+        const cellTexts = Array.from(cells).map((c) => c.textContent?.trim() || '');
 
         // Look for method in first few cells
         for (let i = 0; i < Math.min(cellTexts.length, 3); i++) {
@@ -639,7 +658,9 @@ async function extractGenericEndpoints(page) {
     // Strategy 3: Scan body text for patterns
     if (endpoints.length === 0) {
       const bodyText = document.body.innerText;
-      const matches = bodyText.matchAll(/(GET|POST|PUT|DELETE|PATCH)\s+(\/[a-zA-Z0-9_\-/{}\[\]]+)/gi);
+      const matches = bodyText.matchAll(
+        /(GET|POST|PUT|DELETE|PATCH)\s+(\/[a-zA-Z0-9_\-/{}[\]]+)/gi
+      );
 
       for (const match of matches) {
         const key = `${match[1].toUpperCase()}:${match[2]}`;
@@ -686,7 +707,7 @@ async function extractApiInfo(page, framework) {
           version = spec.info.version || null;
           description = spec.info.description || null;
         }
-      } catch (e) {
+      } catch (_e) {
         // Fall through
       }
     }

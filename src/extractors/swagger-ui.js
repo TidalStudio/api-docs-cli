@@ -72,7 +72,6 @@ export class AuthenticationRequiredError extends SwaggerUIExtractorError {
 
 const DEFAULT_TIMEOUT_MS = 30000;
 const SWAGGER_UI_READY_TIMEOUT_MS = 15000;
-const NETWORK_IDLE_TIMEOUT_MS = 5000;
 
 // Patterns that indicate spec-related network requests
 const SPEC_URL_PATTERNS = [
@@ -240,7 +239,7 @@ async function extractSpecFromScripts(page) {
         if (specMatch) {
           try {
             // This is risky but necessary for inline specs
-            // eslint-disable-next-line no-eval
+
             return eval('(' + specMatch[1] + ')');
           } catch {
             // Continue to next match
@@ -251,7 +250,6 @@ async function extractSpecFromScripts(page) {
         const windowSpecMatch = content.match(/window\.spec\s*=\s*(\{[\s\S]*?\});/);
         if (windowSpecMatch) {
           try {
-            // eslint-disable-next-line no-eval
             return eval('(' + windowSpecMatch[1] + ')');
           } catch {
             // Continue
@@ -454,10 +452,7 @@ export async function extractFromSwaggerUI(url, options = {}) {
     return null;
   } catch (error) {
     // Re-throw our custom errors
-    if (
-      error instanceof SwaggerUIExtractorError ||
-      error instanceof BrowserError
-    ) {
+    if (error instanceof SwaggerUIExtractorError || error instanceof BrowserError) {
       throw error;
     }
 

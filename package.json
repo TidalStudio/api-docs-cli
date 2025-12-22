@@ -11,7 +11,13 @@
   },
   "scripts": {
     "start": "node bin/api-docs.js",
-    "release": "node release.js"
+    "release": "node release.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "node --test",
+    "test:smoke": "node bin/api-docs.js --help"
   },
   "keywords": [
     "cli",
@@ -39,5 +45,9 @@
     "js-yaml": "^4.1.0",
     "puppeteer": "^24.34.0",
     "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.17.0",
+    "prettier": "^3.4.2"
   }
 }

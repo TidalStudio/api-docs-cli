@@ -259,7 +259,6 @@ async function extractSpecFromScripts(page) {
         const specMatch = content.match(/spec\s*:\s*(\{[\s\S]*?\})\s*[,}]/);
         if (specMatch) {
           try {
-            // eslint-disable-next-line no-eval
             const parsed = eval('(' + specMatch[1] + ')');
             if (parsed && (parsed.openapi || parsed.swagger)) {
               return { spec: parsed };
@@ -527,10 +526,7 @@ export async function extractFromRedoc(url, options = {}) {
     return null;
   } catch (error) {
     // Re-throw our custom errors
-    if (
-      error instanceof RedocExtractorError ||
-      error instanceof BrowserError
-    ) {
+    if (error instanceof RedocExtractorError || error instanceof BrowserError) {
       throw error;
     }
 

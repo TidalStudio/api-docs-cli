@@ -141,10 +141,7 @@ export async function searchProvider(query) {
     // Extract docs URL from the API page
     return await extractDocsFromApiPage(page, normalizedQuery);
   } catch (error) {
-    if (
-      error instanceof ProviderNotFoundError ||
-      error instanceof DocsUrlNotFoundError
-    ) {
+    if (error instanceof ProviderNotFoundError || error instanceof DocsUrlNotFoundError) {
       throw error;
     }
     throw new APITrackerSearchError(query, error.message, error);
@@ -178,9 +175,7 @@ async function findBestSearchResult(page, query) {
     for (const link of links) {
       const href = link.getAttribute('href');
       const text = link.textContent?.trim().toLowerCase() || '';
-      const parentText =
-        link.closest('div, li, article')?.textContent?.trim().toLowerCase() ||
-        '';
+      const parentText = link.closest('div, li, article')?.textContent?.trim().toLowerCase() || '';
 
       // Extract provider slug from URL
       const match = href.match(/\/a\/([^/?#]+)/);
@@ -197,9 +192,7 @@ async function findBestSearchResult(page, query) {
 
         if (score > 0) {
           results.push({
-            url: href.startsWith('http')
-              ? href
-              : `https://apitracker.io${href}`,
+            url: href.startsWith('http') ? href : `https://apitracker.io${href}`,
             slug,
             text,
             score,

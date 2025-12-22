@@ -25,10 +25,7 @@ export class BrowserError extends Error {
  */
 export class BrowserNotInstalledError extends BrowserError {
   constructor(cause = null) {
-    super(
-      'Browser not found. Run `npx puppeteer browsers install chrome` to install.',
-      cause
-    );
+    super('Browser not found. Run `npx puppeteer browsers install chrome` to install.', cause);
     this.name = 'BrowserNotInstalledError';
   }
 }
@@ -49,12 +46,7 @@ export class BrowserLaunchError extends BrowserError {
 
 const DEFAULT_LAUNCH_OPTIONS = {
   headless: true,
-  args: [
-    '--no-sandbox',
-    '--disable-setuid-sandbox',
-    '--disable-dev-shm-usage',
-    '--disable-gpu',
-  ],
+  args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
   timeout: 30000,
 };
 

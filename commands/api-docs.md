@@ -11,6 +11,7 @@ Fetch and display API endpoint documentation based on the user's input.
    - Otherwise, treat it as an APIs.guru provider name (e.g., "stripe", "github", "twilio")
 
 2. **Fetch the endpoints**:
+
    ```bash
    api-docs endpoints <query>
    ```
@@ -28,13 +29,16 @@ Fetch and display API endpoint documentation based on the user's input.
 ## Examples
 
 **User runs:** `/api-docs stripe`
+
 - Execute: `api-docs endpoints stripe`
 - Return formatted endpoint list
 
 **User runs:** `/api-docs https://petstore.swagger.io/v2/swagger.json`
+
 - Execute: `api-docs endpoints https://petstore.swagger.io/v2/swagger.json`
 - Return formatted endpoint list
 
 **User runs:** `/api-docs github`
+
 - Execute: `api-docs endpoints github`
 - Return formatted endpoint list for GitHub API

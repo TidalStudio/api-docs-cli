@@ -11,7 +11,7 @@ const __dirname = dirname(__filename);
 
 const rl = createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 });
 
 const question = (prompt) => new Promise((resolve) => rl.question(prompt, resolve));
@@ -51,8 +51,12 @@ function bumpVersion(version, type) {
 
 function exec(cmd, options = {}) {
   try {
-    return execSync(cmd, { encoding: 'utf8', stdio: options.silent ? 'pipe' : 'inherit', ...options });
-  } catch (error) {
+    return execSync(cmd, {
+      encoding: 'utf8',
+      stdio: options.silent ? 'pipe' : 'inherit',
+      ...options,
+    });
+  } catch (_error) {
     if (!options.ignoreError) {
       console.error(`\n✗ Command failed: ${cmd}`);
       process.exit(1);
@@ -126,9 +130,7 @@ async function main() {
   // Git operations
   exec('git add package.json');
 
-  const commitMessage = description.trim()
-    ? `${title}\n\n${description.trim()}`
-    : title;
+  const commitMessage = description.trim() ? `${title}\n\n${description.trim()}` : title;
 
   exec(`git commit -m "${commitMessage.replace(/"/g, '\\"')}"`);
   console.log(`✓ Created commit: ${title}`);

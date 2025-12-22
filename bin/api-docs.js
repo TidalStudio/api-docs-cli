@@ -2,23 +2,10 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import chalk from 'chalk';
-import {
-  lookupProvider,
-  ProviderNotFoundError,
-  DiscoveryFetchError,
-} from '../src/discovery.js';
-import {
-  fetchOpenAPISpec,
-  OpenAPIExtractorError,
-} from '../src/extractors/openapi.js';
-import {
-  extractFromSwaggerUI,
-  SwaggerUIExtractorError,
-} from '../src/extractors/swagger-ui.js';
-import {
-  scrapeEndpoints,
-  DocsScraperError,
-} from '../src/extractors/docs-scraper.js';
+import { lookupProvider, ProviderNotFoundError, DiscoveryFetchError } from '../src/discovery.js';
+import { fetchOpenAPISpec, OpenAPIExtractorError } from '../src/extractors/openapi.js';
+import { extractFromSwaggerUI, SwaggerUIExtractorError } from '../src/extractors/swagger-ui.js';
+import { scrapeEndpoints, DocsScraperError } from '../src/extractors/docs-scraper.js';
 import { closeBrowser, getPage } from '../src/browser.js';
 import {
   setCache,
@@ -48,26 +35,6 @@ function isSpecUrl(url) {
 }
 
 /**
- * Common paths where API reference docs are often found.
- */
-const API_REFERENCE_PATHS = [
-  '/api/api-reference',
-  '/api/api-reference/',
-  '/api-reference',
-  '/api-reference/',
-  '/api/reference',
-  '/api/reference/',
-  '/reference/api',
-  '/reference/api/',
-  '/api/docs',
-  '/api/docs/',
-  '/api',
-  '/api/',
-  '/docs/api',
-  '/docs/api/',
-];
-
-/**
  * Finds the API reference URL from a base docs URL.
  * Navigates to the page and looks for API reference links.
  *
@@ -85,7 +52,13 @@ async function findApiReferenceUrl(baseUrl, page) {
       const links = Array.from(document.querySelectorAll('a[href]'));
 
       // Priority 1: Links with "API Reference" or similar text
-      const apiRefKeywords = ['api reference', 'api-reference', 'api docs', 'rest api', 'api documentation'];
+      const apiRefKeywords = [
+        'api reference',
+        'api-reference',
+        'api docs',
+        'rest api',
+        'api documentation',
+      ];
       for (const link of links) {
         const text = link.textContent?.toLowerCase().trim() || '';
         const href = link.getAttribute('href');
@@ -151,7 +124,9 @@ async function handleFetch(argv) {
         try {
           const cached = await getCached(query);
           console.log(chalk.green(`Found cached spec for: ${query}`));
-          console.log(chalk.dim(`Type: ${cached.metadata.specType} ${cached.metadata.specVersion}`));
+          console.log(
+            chalk.dim(`Type: ${cached.metadata.specType} ${cached.metadata.specVersion}`)
+          );
           console.log(chalk.dim(`Cached: ${cached.metadata.cachedAt}`));
           console.log();
           const output = formatEndpointList(cached.spec);
@@ -218,7 +193,9 @@ async function handleFetch(argv) {
         const swaggerResult = await extractFromSwaggerUI(query, { timeout: 30000 });
         if (swaggerResult) {
           console.log(chalk.green(`Found: ${swaggerResult.specInfo.title}`));
-          console.log(chalk.dim(`Type: ${swaggerResult.specInfo.type} ${swaggerResult.specInfo.version}`));
+          console.log(
+            chalk.dim(`Type: ${swaggerResult.specInfo.type} ${swaggerResult.specInfo.version}`)
+          );
           console.log(chalk.dim('(extracted via Swagger UI)'));
           console.log();
 
@@ -757,12 +734,7 @@ yargs(hideBin(process.argv))
     },
     handleFetch
   )
-  .command(
-    'list',
-    'List all cached API specifications',
-    () => {},
-    handleListCached
-  )
+  .command('list', 'List all cached API specifications', () => {}, handleListCached)
   .command(
     'clear [url]',
     'Clear cached API specifications',
@@ -795,11 +767,16 @@ yargs(hideBin(process.argv))
     },
     handleEndpoint
   )
-  .command('$0', 'API documentation extractor CLI', () => {}, () => {
-    console.log(chalk.green('api-docs CLI'));
-    console.log(chalk.dim('Extract API endpoints from any documentation.'));
-    console.log();
-    console.log(chalk.dim('Use --help to see available commands.'));
-  })
+  .command(
+    '$0',
+    'API documentation extractor CLI',
+    () => {},
+    () => {
+      console.log(chalk.green('api-docs CLI'));
+      console.log(chalk.dim('Extract API endpoints from any documentation.'));
+      console.log();
+      console.log(chalk.dim('Use --help to see available commands.'));
+    }
+  )
   .help()
   .parse();
