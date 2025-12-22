@@ -1,6 +1,6 @@
 {
-  "name": "api-docs-cli",
-  "version": "0.1.0",
+  "name": "@tidalstudios/api-docs-cli",
+  "version": "1.0.2",
   "description": "CLI tool for extracting API documentation",
   "type": "module",
   "bin": {
@@ -21,7 +21,7 @@
     "swagger"
   ],
   "author": "Logan McDuffie",
-  "license": "ISC",
+  "license": "Elastic-2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TidalStudio/api-docs-cli.git"
