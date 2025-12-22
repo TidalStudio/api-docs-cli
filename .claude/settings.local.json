@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(jira issue create:*)",
+      "Bash(jira issue edit:*)",
+      "Bash(jira issue delete:*)",
+      "Bash(jira epic create:*)",
+      "Bash(jira issue view:*)",
+      "Bash(node bin/api-docs.js:*)",
+      "Bash(MSYS_NO_PATHCONV=1 node bin/api-docs.js:*)"
+    ]
+  }
+}

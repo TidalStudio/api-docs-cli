@@ -1,0 +1,43 @@
+{
+  "name": "api-docs-cli",
+  "version": "0.1.0",
+  "description": "CLI tool for extracting API documentation",
+  "type": "module",
+  "bin": {
+    "api-docs": "./bin/api-docs.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node bin/api-docs.js",
+    "release": "node release.js"
+  },
+  "keywords": [
+    "cli",
+    "api",
+    "documentation",
+    "openapi",
+    "swagger"
+  ],
+  "author": "Logan McDuffie",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TidalStudio/api-docs-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TidalStudio/api-docs-cli/issues"
+  },
+  "homepage": "https://github.com/TidalStudio/api-docs-cli#readme",
+  "files": [
+    "bin/",
+    "src/"
+  ],
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "js-yaml": "^4.1.0",
+    "puppeteer": "^24.34.0",
+    "yargs": "^18.0.0"
+  }
+}
