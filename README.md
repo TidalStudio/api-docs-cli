@@ -70,3 +70,13 @@ Works as a Claude Code subagent:
 ```
 Task(subagent_type="api-docs", prompt="List endpoints for the Stripe API")
 ```
+
+## Documentation
+
+For detailed documentation, see the [Wiki](https://github.com/TidalStudio/api-docs-cli/wiki):
+
+- [Command Reference](https://github.com/TidalStudio/api-docs-cli/wiki/Command-Reference) - Full command documentation
+- [Agent Integration](https://github.com/TidalStudio/api-docs-cli/wiki/Agent-Integration) - Using with AI agents
+- [Configuration](https://github.com/TidalStudio/api-docs-cli/wiki/Configuration) - Cache and settings
+- [Troubleshooting](https://github.com/TidalStudio/api-docs-cli/wiki/Troubleshooting) - Common issues and solutions
+- [Development](https://github.com/TidalStudio/api-docs-cli/wiki/Development) - Contributing guide
